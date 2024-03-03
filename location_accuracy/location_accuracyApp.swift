@@ -9,9 +9,24 @@ import SwiftUI
 
 @main
 struct location_accuracyApp: App {
+    @UIApplicationDelegateAdaptor (AppDelegate.self) var appDelegate
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
+    }
+}
+
+import UIKit
+import GoogleMaps
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+
+        guard let apiKey = Env.getGoogleMapKey() else { return true }
+        GMSServices.provideAPIKey(apiKey)
+
+        return true
     }
 }
