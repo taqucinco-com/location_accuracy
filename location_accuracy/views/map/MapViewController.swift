@@ -10,8 +10,7 @@ import SwiftUI
 import GoogleMaps
 
 class MapViewController: UIViewController {
-    var mapView: GMSMapView!
-    private let locationService = LocationService.shared
+    let mapView = GMSMapView()
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -23,7 +22,6 @@ class MapViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        mapView = GMSMapView()
         mapView.frame = self.view.bounds
         self.view.addSubview(mapView)
 
@@ -33,7 +31,7 @@ class MapViewController: UIViewController {
     private func setup() {
         // カメラの初期位置を設定
         let camera = GMSCameraPosition.camera(
-            withTarget: CLLocationCoordinate2D(latitude: 43.0, longitude: 141.0),
+            withTarget: CLLocationCoordinate2D(latitude: 43.1, longitude: 141.0),
             zoom: 17.0,
             bearing: 0,
             viewingAngle: 40

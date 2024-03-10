@@ -7,19 +7,33 @@
 
 import SwiftUI
 import CoreLocation
+import GoogleMaps
 
 struct MapContainerView: View {
-    private let locationService = LocationService.shared
-    @State var auth: CLAuthorizationStatus = .notDetermined
-    @State var myLocation: CLLocationCoordinate2D? = nil
-    @State var pins: [CLLocationCoordinate2D] = []
+    
+    let myLocation: CLLocationCoordinate2D?
+    let pins: [CLLocationCoordinate2D]
+    var didChangeCameraPosition: (GMSCameraPosition) -> () = { print($0) }
+    
+    var myLocationMoveOneTime: (Bool) -> ()
     
     var body: some View {
+        // MapViewControllerBridgeに対する単方向bindingに変換する
+        let _myLocation = Binding<CLLocationCoordinate2D?>(
+            get: { myLocation },
+            set: { _ in }
+        )
+        let _pins = Binding<[CLLocationCoordinate2D]>(
+            get: { pins },
+            set: { _ in }
+        )
         ZStack {
             GeometryReader { geometry in
                 MapViewControllerBridge(
-                    myLocation: $myLocation,
-                    pins: $pins
+                    myLocation: _myLocation,
+                    pins: _pins,
+                    didChangeCameraPosition: didChangeCameraPosition,
+                    myLocationMoveOneTime: myLocationMoveOneTime
                 )
                     .background(Color(
                         red: 254.0/255.0,
@@ -27,49 +41,15 @@ struct MapContainerView: View {
                         blue: 220.0/255.0)
                     )
             }
-            if auth == .authorizedAlways || auth == .authorizedWhenInUse {
-                VStack {
-                    Spacer()
-                    Button(action: {
-                        // Action to perform when the button is tapped
-                        locationService.requestLocation()
-                    }) {
-                        Text("add")
-                            .padding() // Add padding to the text inside the button
-                            .foregroundColor(.white) // Set text color
-                            .background(Color.blue) // Set background color
-                            .cornerRadius(10) // Set corner radius to create a rounded rectangle
-                    }
-                }
-            }
-        }
-        .onAppear {
-            locationService.requestAlwaysAuthorization()
-            Task {
-                for try await delegate in try await locationService.deleteStream() {
-                    switch delegate {
-                    case .authorization(let status):
-                        let tupple = (self.auth, status)
-                        switch tupple {
-                        case (.notDetermined, .authorizedAlways), (.authorizedWhenInUse, .restricted):
-                            if let coordinate = locationService.getLocation()?.coordinate {
-                                myLocation = coordinate
-                            }
-                        default:
-                            break
-                        }
-                        self.auth = status
-                    case .locations(let locations):
-                        if let coordinate = locations.first?.coordinate {
-                            pins = pins + [coordinate]
-                        }
-                    }
-                }
-            }
         }
     }
 }
 
 #Preview {
-    MapContainerView()
+    return MapContainerView(
+        myLocation: nil,
+        pins: [],
+        didChangeCameraPosition: { _ in },
+        myLocationMoveOneTime: { _ in }
+    )
 }

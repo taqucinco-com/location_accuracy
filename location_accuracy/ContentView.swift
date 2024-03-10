@@ -13,11 +13,13 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack(path: $router.routes) {
-            MapContainerView()
-                .navigationDestination(for: String.self) { route in
-                Text("")
-            }
-//            .navigationTitle("画面")
+            HomeScreen()
+//                .navigationDestination(for: String.self) {
+//                    switch $0 {
+//                    default:
+//                        EmptyView()
+//                    }
+//                }
         }
     }
 }

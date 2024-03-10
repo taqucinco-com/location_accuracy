@@ -14,6 +14,7 @@
 		56549E2C2B9449E100DB8949 /* location_accuracyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56549E2B2B9449E100DB8949 /* location_accuracyTests.swift */; };
 		56549E362B9449E100DB8949 /* location_accuracyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56549E352B9449E100DB8949 /* location_accuracyUITests.swift */; };
 		56549E382B9449E100DB8949 /* location_accuracyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56549E372B9449E100DB8949 /* location_accuracyUITestsLaunchTests.swift */; };
+		908686042B9DC22B009123B8 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908686032B9DC22B009123B8 /* HomeScreen.swift */; };
 		909E43822B944E5C0048EB56 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909E43812B944E5C0048EB56 /* Route.swift */; };
 		909E43862B9451CD0048EB56 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 909E43852B9451CD0048EB56 /* GoogleMaps */; };
 		909E438B2B94525B0048EB56 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909E438A2B94525B0048EB56 /* MapViewController.swift */; };
@@ -57,6 +58,7 @@
 		56549E352B9449E100DB8949 /* location_accuracyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = location_accuracyUITests.swift; sourceTree = "<group>"; };
 		56549E372B9449E100DB8949 /* location_accuracyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = location_accuracyUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		908686022B9D8D1B009123B8 /* location-accuracy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "location-accuracy-Info.plist"; sourceTree = SOURCE_ROOT; };
+		908686032B9DC22B009123B8 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		909E43812B944E5C0048EB56 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		909E438A2B94525B0048EB56 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		909E43922B9455550048EB56 /* MapViewControllerBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewControllerBridge.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				909E43812B944E5C0048EB56 /* Route.swift */,
+				908686032B9DC22B009123B8 /* HomeScreen.swift */,
 			);
 			path = pages;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				909E43A02B9588400048EB56 /* LocationService.swift in Sources */,
 				909E439C2B945BC80048EB56 /* Env.swift in Sources */,
 				909E43932B9455550048EB56 /* MapViewControllerBridge.swift in Sources */,
+				908686042B9DC22B009123B8 /* HomeScreen.swift in Sources */,
 				909E43952B9456360048EB56 /* MapContainerView.swift in Sources */,
 				56549E1B2B9449DE00DB8949 /* location_accuracyApp.swift in Sources */,
 				909E438B2B94525B0048EB56 /* MapViewController.swift in Sources */,
