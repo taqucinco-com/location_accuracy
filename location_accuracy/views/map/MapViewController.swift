@@ -10,7 +10,8 @@ import SwiftUI
 import GoogleMaps
 
 class MapViewController: UIViewController {
-    private var mapView: GMSMapView!
+    var mapView: GMSMapView!
+    private let locationService = LocationService.shared
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -33,10 +34,15 @@ class MapViewController: UIViewController {
         // カメラの初期位置を設定
         let camera = GMSCameraPosition.camera(
             withTarget: CLLocationCoordinate2D(latitude: 43.0, longitude: 141.0),
-            zoom: 11.0,
+            zoom: 17.0,
             bearing: 0,
             viewingAngle: 40
         )
         mapView.camera = camera
+        mapView.isMyLocationEnabled = true
+    }
+    
+    func animateLocation(_ coordinate: CLLocationCoordinate2D) {
+        mapView.animate(toLocation: coordinate)
     }
 }

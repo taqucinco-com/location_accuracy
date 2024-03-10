@@ -20,13 +20,14 @@ struct location_accuracyApp: App {
 
 import UIKit
 import GoogleMaps
+import CoreLocation
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
 
         guard let apiKey = Env.getGoogleMapKey() else { return true }
         GMSServices.provideAPIKey(apiKey)
-
+        
         return true
     }
 }

@@ -25,6 +25,7 @@
 		909E43982B945A7D0048EB56 /* env.plist in Resources */ = {isa = PBXBuildFile; fileRef = 909E43972B945A7D0048EB56 /* env.plist */; };
 		909E439A2B945AC10048EB56 /* env_sample.plist in Resources */ = {isa = PBXBuildFile; fileRef = 909E43992B945AC10048EB56 /* env_sample.plist */; };
 		909E439C2B945BC80048EB56 /* Env.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909E439B2B945BC80048EB56 /* Env.swift */; };
+		909E43A02B9588400048EB56 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909E439F2B9588400048EB56 /* LocationService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		56549E312B9449E100DB8949 /* location_accuracyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = location_accuracyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		56549E352B9449E100DB8949 /* location_accuracyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = location_accuracyUITests.swift; sourceTree = "<group>"; };
 		56549E372B9449E100DB8949 /* location_accuracyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = location_accuracyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		908686022B9D8D1B009123B8 /* location-accuracy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "location-accuracy-Info.plist"; sourceTree = SOURCE_ROOT; };
 		909E43812B944E5C0048EB56 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		909E438A2B94525B0048EB56 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		909E43922B9455550048EB56 /* MapViewControllerBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewControllerBridge.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 		909E43972B945A7D0048EB56 /* env.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = env.plist; sourceTree = "<group>"; };
 		909E43992B945AC10048EB56 /* env_sample.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = env_sample.plist; sourceTree = "<group>"; };
 		909E439B2B945BC80048EB56 /* Env.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Env.swift; sourceTree = "<group>"; };
+		909E439F2B9588400048EB56 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,9 +120,11 @@
 		56549E192B9449DE00DB8949 /* location_accuracy */ = {
 			isa = PBXGroup;
 			children = (
+				908686022B9D8D1B009123B8 /* location-accuracy-Info.plist */,
 				909E43962B945A380048EB56 /* env */,
-				909E43882B9452140048EB56 /* views */,
+				909E439D2B9587F10048EB56 /* feature */,
 				909E43872B9451FB0048EB56 /* pages */,
+				909E43882B9452140048EB56 /* views */,
 				56549E1A2B9449DE00DB8949 /* location_accuracyApp.swift */,
 				56549E1C2B9449DE00DB8949 /* ContentView.swift */,
 				56549E1E2B9449E000DB8949 /* Assets.xcassets */,
@@ -194,6 +199,22 @@
 				909E439B2B945BC80048EB56 /* Env.swift */,
 			);
 			path = env;
+			sourceTree = "<group>";
+		};
+		909E439D2B9587F10048EB56 /* feature */ = {
+			isa = PBXGroup;
+			children = (
+				909E439E2B9587FF0048EB56 /* location */,
+			);
+			path = feature;
+			sourceTree = "<group>";
+		};
+		909E439E2B9587FF0048EB56 /* location */ = {
+			isa = PBXGroup;
+			children = (
+				909E439F2B9588400048EB56 /* LocationService.swift */,
+			);
+			path = location;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -339,6 +360,7 @@
 			files = (
 				909E43822B944E5C0048EB56 /* Route.swift in Sources */,
 				56549E1D2B9449DE00DB8949 /* ContentView.swift in Sources */,
+				909E43A02B9588400048EB56 /* LocationService.swift in Sources */,
 				909E439C2B945BC80048EB56 /* Env.swift in Sources */,
 				909E43932B9455550048EB56 /* MapViewControllerBridge.swift in Sources */,
 				909E43952B9456360048EB56 /* MapContainerView.swift in Sources */,
@@ -505,6 +527,10 @@
 				DEVELOPMENT_TEAM = Y48P6SY25X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "location-accuracy-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "ほげ";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "使用します";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "使用します";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -534,6 +560,10 @@
 				DEVELOPMENT_TEAM = Y48P6SY25X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "location-accuracy-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "ほげ";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "使用します";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "使用します";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
