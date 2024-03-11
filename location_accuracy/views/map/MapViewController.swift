@@ -37,7 +37,6 @@ class MapViewController: UIViewController {
             viewingAngle: 40
         )
         mapView.camera = camera
-        mapView.isMyLocationEnabled = true
     }
     
     func animateLocation(_ coordinate: CLLocationCoordinate2D) {

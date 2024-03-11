@@ -35,8 +35,8 @@ class LocationService: NSObject, ObservableObject {
         locationManager.requestAlwaysAuthorization()
     }
     
-    // 位置情報権限のストリーム
-    func deleteStream() async throws -> AsyncStream<LocationServiceStream> {
+    // 位置情報のストリーム
+    func locationStream() async throws -> AsyncStream<LocationServiceStream> {
         let stream = AsyncStream<LocationServiceStream> { continuation in
             continuation.yield(.authorization(locationManager.authorizationStatus))
             self.authDelegate = LocationServiceDelegate(

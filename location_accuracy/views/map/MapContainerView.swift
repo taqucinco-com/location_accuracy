@@ -13,6 +13,7 @@ struct MapContainerView: View {
     
     let myLocation: CLLocationCoordinate2D?
     let pins: [CLLocationCoordinate2D]
+    let authorized: Bool
     var didChangeCameraPosition: (GMSCameraPosition) -> () = { print($0) }
     
     var myLocationMoveOneTime: (Bool) -> ()
@@ -27,11 +28,17 @@ struct MapContainerView: View {
             get: { pins },
             set: { _ in }
         )
-        ZStack {
+        let _authorized = Binding<Bool>(
+            get: { authorized },
+            set: { _ in }
+        )
+        
+        ZStack(alignment: .top) {
             GeometryReader { geometry in
                 MapViewControllerBridge(
                     myLocation: _myLocation,
                     pins: _pins,
+                    authorized: _authorized,
                     didChangeCameraPosition: didChangeCameraPosition,
                     myLocationMoveOneTime: myLocationMoveOneTime
                 )
@@ -42,6 +49,8 @@ struct MapContainerView: View {
                     )
             }
         }
+        .edgesIgnoringSafeArea(.top)
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
@@ -49,6 +58,7 @@ struct MapContainerView: View {
     return MapContainerView(
         myLocation: nil,
         pins: [],
+        authorized: false,
         didChangeCameraPosition: { _ in },
         myLocationMoveOneTime: { _ in }
     )

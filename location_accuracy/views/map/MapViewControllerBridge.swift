@@ -14,6 +14,7 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
     
     @Binding var myLocation: CLLocationCoordinate2D?
     @Binding var pins: [CLLocationCoordinate2D]
+    @Binding var authorized: Bool
     var didChangeCameraPosition: (GMSCameraPosition) -> ()
     
     var myLocationMoveOneTime: (Bool) -> ()
@@ -23,6 +24,8 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> MapViewController {
         let uiViewController = MapViewController()
         uiViewController.mapView.delegate = context.coordinator
+        uiViewController.mapView.isMyLocationEnabled = authorized
+        uiViewController.mapView.settings.myLocationButton = authorized
         return uiViewController
     }
 
@@ -31,6 +34,9 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
             uiViewController.animateLocation(myLocation)
             myLocationMoveOneTime(true)
         }
+        
+        uiViewController.mapView.isMyLocationEnabled = authorized
+        uiViewController.mapView.settings.myLocationButton = authorized
 
         uiViewController.mapView.clear()
         
