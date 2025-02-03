@@ -43,7 +43,7 @@ actor SpeechRecognizer: ObservableObject {
      requests access to the speech recognizer and the microphone.
      */
     init() {
-        recognizer = SFSpeechRecognizer()
+        recognizer = SFSpeechRecognizer(locale: Locale(identifier: "ja-JP"))
         guard recognizer != nil else {
             transcribe(RecognizerError.nilRecognizer)
             return
@@ -61,7 +61,40 @@ actor SpeechRecognizer: ObservableObject {
                 transcribe(error)
             }
         }
+      
+      let nc = NotificationCenter.default
+      nc.addObserver(forName: AVAudioSession.interruptionNotification,
+                     object: AVAudioSession.sharedInstance(),
+                     queue: OperationQueue.main) { notification in
+        
+        guard
+        let userInfo = notification.userInfo,
+        let interruptionTypeRawValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
+        let interruptionType = AVAudioSession.InterruptionType(rawValue: interruptionTypeRawValue)
+        else {
+          return
+        }
+        
+        switch (interruptionType) {
+        case .began:
+          print("began")
+        case .ended:
+          print("ended")
+        @unknown default:
+          print("unknown")
+        }
+
+        notification.userInfo?.forEach { key, value in
+          print("\(key): \(value)")
+        }
+      }
     }
+  
+  deinit {
+    NotificationCenter.default.removeObserver(self,
+                                              name: AVAudioSession.interruptionNotification,
+                                              object: AVAudioSession.sharedInstance())
+  }
     
     @MainActor func startTranscribing() {
         Task {
@@ -97,7 +130,17 @@ actor SpeechRecognizer: ObservableObject {
             let (audioEngine, request) = try Self.prepareEngine()
             self.audioEngine = audioEngine
             self.request = request
+//            self.request?.shouldReportPartialResults = false
+//            self.request?.requiresOnDeviceRecognition = false
+            self.request?.addsPunctuation = true
+
             self.task = recognizer.recognitionTask(with: request, resultHandler: { [weak self] result, error in
+              if error != nil {
+                print(error as Any)
+              }
+              if result?.isFinal == true {
+                print(result as Any)
+              }
                 self?.recognitionHandler(audioEngine: audioEngine, result: result, error: error)
             })
         } catch {
@@ -119,7 +162,8 @@ actor SpeechRecognizer: ObservableObject {
         let audioEngine = AVAudioEngine()
         
         let request = SFSpeechAudioBufferRecognitionRequest()
-        request.shouldReportPartialResults = true
+//        request.shouldReportPartialResults = false
+        request.addsPunctuation = true
         
         let audioSession = AVAudioSession.sharedInstance()
         try audioSession.setCategory(.playAndRecord, mode: .measurement, options: .duckOthers)
@@ -153,6 +197,7 @@ actor SpeechRecognizer: ObservableObject {
     
     nonisolated private func transcribe(_ message: String) {
         Task { @MainActor in
+            print(message)
             // messageとtranscriptを比較して新しい文節を抜き出す
             let differences = message.difference(from: transcript)
             let token = differences.inferringMoves()
